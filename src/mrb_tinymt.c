@@ -30,7 +30,6 @@
 #include "mruby/data.h"
 #include "tinymt32.h"
 
-#include <malloc.h>
 #include <time.h>
 
 #define DONE mrb_gc_arena_restore(mrb, 0);
@@ -74,7 +73,7 @@ static tinymt32_t *mrb_tinymt_get_context(mrb_state *mrb,  mrb_value self)
 
 static mrb_value mrb_tinymt_init(mrb_state *mrb, mrb_value self)
 {
-  tinymt32_t *tinymt = (tinymt32_t *)malloc(sizeof(tinymt32_t));
+  tinymt32_t *tinymt = (tinymt32_t *)mrb_malloc(mrb, sizeof(tinymt32_t));
 
   mrb_get_args(mrb, "fff", &tinymt->mat1, &tinymt->mat2, &tinymt->tmat);
   mrb_iv_set(mrb
