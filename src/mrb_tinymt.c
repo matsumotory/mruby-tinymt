@@ -63,7 +63,7 @@ static tinymt32_t *mrb_tinymt_get_context(mrb_state *mrb,  mrb_value self)
   tinymt32_t *tmt;
   mrb_value ctx;
 
-  ctx = mrb_iv_get(mrb, self, mrb_intern(mrb, "tinymt32_ctx"));
+  ctx = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "tinymt32_ctx"));
   Data_Get_Struct(mrb, ctx, &tinymt32_t_type, tmt);
   if (!tmt)
     mrb_raise(mrb, E_RUNTIME_ERROR, "redisContext get from mrb_iv_get redis_c failed");
@@ -78,7 +78,7 @@ static mrb_value mrb_tinymt_init(mrb_state *mrb, mrb_value self)
   mrb_get_args(mrb, "fff", &tinymt->mat1, &tinymt->mat2, &tinymt->tmat);
   mrb_iv_set(mrb
     , self
-    , mrb_intern(mrb, "tinymt32_ctx")
+    , mrb_intern_lit(mrb, "tinymt32_ctx")
     , mrb_obj_value(Data_Wrap_Struct(mrb
       , mrb->object_class
       , &tinymt32_t_type
@@ -145,7 +145,7 @@ static mrb_value mrb_tinymt_rand(mrb_state *mrb, mrb_value self)
     return mrb_nil_value();
   }
 
-  mrb_value seed = mrb_gv_get(mrb, mrb_intern(mrb, RAND_SEED_KEY));
+  mrb_value seed = mrb_gv_get(mrb, mrb_intern_lit(mrb, RAND_SEED_KEY));
   if (mrb_nil_p(seed))
     mrb_call_tinymt_srand(mrb, tinymt, mrb_nil_value());
 
@@ -182,12 +182,12 @@ static mrb_value mrb_tinymt_srand(mrb_state *mrb, mrb_value self)
   }
 
   seed = mrb_call_tinymt_srand(mrb, tinymt, seed);
-  mrb_value old_seed = mrb_gv_get(mrb, mrb_intern(mrb, RAND_SEED_KEY));
-  mrb_gv_set(mrb, mrb_intern(mrb, RAND_SEED_KEY), seed);
+  mrb_value old_seed = mrb_gv_get(mrb, mrb_intern_lit(mrb, RAND_SEED_KEY));
+  mrb_gv_set(mrb, mrb_intern_lit(mrb, RAND_SEED_KEY), seed);
 
   mrb_iv_set(mrb
     , self
-    , mrb_intern(mrb, "tinymt32_ctx")
+    , mrb_intern_lit(mrb, "tinymt32_ctx")
     , mrb_obj_value(Data_Wrap_Struct(mrb
       , mrb->object_class
       , &tinymt32_t_type
