@@ -108,7 +108,7 @@ static mrb_value mrb_call_tinymt_rand(mrb_state *mrb, tinymt32_t *tinymt, mrb_va
   mrb_value value;
 
   if (mrb_fixnum(max) == 0) {
-    value = mrb_float_value(tmt_rand_real(tinymt));
+    value = mrb_float_value(mrb, tmt_rand_real(tinymt));
   } else {
     value = mrb_fixnum_value(tmt_rand(tinymt) % mrb_fixnum(max));
   }
