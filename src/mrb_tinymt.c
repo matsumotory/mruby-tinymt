@@ -204,9 +204,9 @@ void mrb_mruby_tinymt_gem_init(mrb_state *mrb)
 
   tmt = mrb_define_class(mrb, "TinyMT", mrb->object_class);
 
-  mrb_define_method(mrb, tmt, "initialize", mrb_tinymt_init,  ARGS_ANY());
-  mrb_define_method(mrb, tmt, "rand",       mrb_tinymt_rand,  ARGS_ANY());
-  mrb_define_method(mrb, tmt, "srand",      mrb_tinymt_srand, ARGS_ANY());
+  mrb_define_method(mrb, tmt, "initialize", mrb_tinymt_init,  MRB_ARGS_ANY());
+  mrb_define_method(mrb, tmt, "rand",       mrb_tinymt_rand,  MRB_ARGS_ANY());
+  mrb_define_method(mrb, tmt, "srand",      mrb_tinymt_srand, MRB_ARGS_ANY());
   DONE;
 }
 
